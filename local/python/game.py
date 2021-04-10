@@ -22,11 +22,11 @@ rooms = {
 }
 
 # Link rooms together
-rooms["dungeon"].n_to = rooms["parapets"]
-rooms["dungeon"].s_to = rooms["embankment"]
+rooms["dungeon"].north_to = rooms["parapets"]
+rooms["dungeon"].south_to = rooms["embankment"]
 rooms["dungeon"].dennis_to = rooms["Dennis"]
-rooms["parapets"].s_to = rooms["dungeon"]
-rooms["embankment"].n_to = rooms["dungeon"]
+rooms["parapets"].south_to = rooms["dungeon"]
+rooms["embankment"].north_to = rooms["dungeon"]
 rooms["Dennis"].not_dennis_to = rooms["dungeon"]
 
 player = Player(current_room=rooms["dungeon"])
@@ -34,8 +34,8 @@ print(player.current_room.description)
 
 while True:
 
-    input_ = input("What wouldst thou deau?")
+    input_ = raw_input("What wouldst thou deau? ").lower()
 
-    if player.current_room.__getattribute__(input_):
-        player.__getattribute__(input_)
+    if getattr(player.current_room, input_ + "_to"):
+        player.current_room = getattr(player.current_room, input_ + "_to")
         print(player.current_room.description)
