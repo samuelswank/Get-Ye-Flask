@@ -32,9 +32,18 @@ rooms["Dennis"].not_dennis_to = rooms["dungeon"]
 player = Player(current_room=rooms["dungeon"])
 print(player.current_room.description)
 
+direction = {
+    "n" : "north",
+    "s" : "south",
+    "not dennis" : "not_dennis"
+}
+
 while True:
 
-    input_ = raw_input("What wouldst thou deau? ").lower()
+    input_ = input("What wouldst thou deau? ").lower()
+
+    if input_ in direction.keys():
+        input_ = direction[input_]
 
     if getattr(player.current_room, input_ + "_to"):
         player.current_room = getattr(player.current_room, input_ + "_to")
