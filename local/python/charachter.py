@@ -9,5 +9,3 @@ class Player:
     def get_item(self, item):
         self.current_room.items.remove(item)
         self.inventory.append(item)
-
-    
